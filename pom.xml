@@ -114,34 +114,34 @@
         </jvmArgs>
       </configuration>
     </plugin>
-    <plugin>                                                                  
-      <groupId>org.apache.maven.plugins</groupId>                             
-      <artifactId>maven-dependency-plugin</artifactId>                        
-      <executions>                                                            
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-dependency-plugin</artifactId>
+      <executions>
         <!-- When using SPARK_PREPEND_CLASSES Spark classes compiled locally don't use
              shaded deps. So here we store jars in their original form which are added
-             when the classpath is computed. 
-        -->                              
-        <execution>                                                           
-          <id>copy-dependencies</id>                                          
-          <phase>package</phase>                                              
-          <goals>                                                             
-            <goal>copy-dependencies</goal>                                    
-          </goals>                                                            
-          <configuration>                                                      
-            <outputDirectory>${project.build.directory}</outputDirectory>     
-            <overWriteReleases>false</overWriteReleases>                      
-            <overWriteSnapshots>false</overWriteSnapshots>                    
-            <overWriteIfNewer>true</overWriteIfNewer>                         
-            <useSubDirectoryPerType>true</useSubDirectoryPerType>             
-            <includeArtifactIds>                                              
+             when the classpath is computed.
+        -->
+        <execution>
+          <id>copy-dependencies</id>
+          <phase>package</phase>
+          <goals>
+            <goal>copy-dependencies</goal>
+          </goals>
+          <configuration>
+            <outputDirectory>${project.build.directory}</outputDirectory>
+            <overWriteReleases>false</overWriteReleases>
+            <overWriteSnapshots>false</overWriteSnapshots>
+            <overWriteIfNewer>true</overWriteIfNewer>
+            <useSubDirectoryPerType>true</useSubDirectoryPerType>
+            <includeArtifactIds>
               guava
-            </includeArtifactIds>                                             
-            <silent>true</silent>                                             
-          </configuration>                                                    
-        </execution>                                                          
-      </executions>                                                           
-    </plugin>  
+            </includeArtifactIds>
+            <silent>true</silent>
+          </configuration>
+        </execution>
+      </executions>
+    </plugin>
     <plugin>
       <artifactId>maven-assembly-plugin</artifactId>
       <version>2.4.1</version>
@@ -189,38 +189,38 @@
       </execution>
     </executions>
     </plugin>
-    <plugin>                                                                  
-        <groupId>org.apache.maven.plugins</groupId>                             
-        <artifactId>maven-shade-plugin</artifactId>                             
-        <version>2.2</version>  
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>2.2</version>
         <configuration>
           <relocations>
-            <relocation>                                                        
-              <pattern>com.google.common</pattern>                              
-              <shadedPattern>org.spark-project.guava</shadedPattern>            
-              <excludes>                                                        
-                <!--                                                            
+            <relocation>
+              <pattern>com.google.common</pattern>
+              <shadedPattern>org.spark-project.guava</shadedPattern>
+              <excludes>
+                <!--
                   These classes cannot be relocated, because the Java API exposes the
                   "Optional" type; the others are referenced by the Optional class.
-                -->                                                             
-                <exclude>com/google/common/base/Absent*</exclude>               
-                <exclude>com/google/common/base/Function</exclude>              
-                <exclude>com/google/common/base/Optional*</exclude>             
-                <exclude>com/google/common/base/Present*</exclude>              
-                <exclude>com/google/common/base/Supplier</exclude>              
-              </excludes>                                                       
-            </relocation>                                                       
-          </relocations>                                                        
-        </configuration>   
+                -->
+                <exclude>com/google/common/base/Absent*</exclude>
+                <exclude>com/google/common/base/Function</exclude>
+                <exclude>com/google/common/base/Optional*</exclude>
+                <exclude>com/google/common/base/Present*</exclude>
+                <exclude>com/google/common/base/Supplier</exclude>
+              </excludes>
+            </relocation>
+          </relocations>
+        </configuration>
       </plugin>
     </plugins>
   </build>
 
 <properties>
   <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  <scala.version>2.10.4</scala.version>
-  <scala.binary.version>2.10</scala.binary.version>
-  <spark.version>1.2.1</spark.version>
+  <scala.version>2.11.8</scala.version>
+  <scala.binary.version>2.11</scala.binary.version>
+  <spark.version>2.0.0-SNAPSHOT</spark.version>
 </properties>
 
 <dependencies>
@@ -235,10 +235,10 @@
     <version>${spark.version}</version>
     <scope>provided</scope>
   </dependency>
-  <dependency>                                                                
-    <groupId>com.google.guava</groupId>                                       
-    <artifactId>guava</artifactId>                                            
+  <dependency>
+    <groupId>com.google.guava</groupId>
+    <artifactId>guava</artifactId>
     <version>18.0</version>
-  </dependency> 
+  </dependency>
 </dependencies>
 </project>
